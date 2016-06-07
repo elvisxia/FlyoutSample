@@ -13,6 +13,12 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Helpers;
+using FlyoutSample.ViewModels;
+
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -26,13 +32,12 @@ namespace FlyoutSample
         public MainPage()
         {
             this.InitializeComponent();
-            List<String> list = new List<string> { "winffee", "abc", "dfadf" };
-            ArmyUnitListView.ItemsSource = list;
-            this.DataContext = this;
+            this.DataContext = new MainPageViewModel();
         }
 
         public void MyHideMethod() {
             UnitFlyout.Hide();
+           
         }
     }
 }

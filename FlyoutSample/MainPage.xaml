@@ -13,8 +13,10 @@
         <StackPanel VerticalAlignment="Center">
             <Button Name="myBtn" Content="Click Me">
                 <Button.Flyout>
-                    <Flyout x:Name="UnitFlyout">
-                        <ListView x:Name="ArmyUnitListView"  SelectionMode="Single"   >
+                    <Flyout x:Name="UnitFlyout" 
+                            local:FlyoutHelpers.Parent="{Binding ElementName=myBtn}" 
+                            local:FlyoutHelpers.IsOpen="{Binding IsFlyoutOpen,Mode=TwoWay}">
+                        <ListView x:Name="ArmyUnitListView"  SelectionMode="Single" ItemsSource="{Binding MyData}">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
                                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -23,7 +25,8 @@
                             <interactivity:Interaction.Behaviors>
                                 <core:EventTriggerBehavior EventName="SelectionChanged" SourceObject="{Binding ElementName=ArmyUnitListView}">
                                     <!--<core:InvokeCommandAction Command="{Binding AddUnitCommand}" CommandParameter="{Binding SelectedItem, ElementName=ArmyUnitListView}" />-->
-                                    <core:CallMethodAction TargetObject="{Binding }" MethodName="MyHideMethod"/>
+                                    <core:InvokeCommandAction Command="{Binding SendCommand}"/>
+                                    <!--<core:CallMethodAction TargetObject="{Binding SendCommand}" MethodName="MyHideMethod"/>-->
                                 </core:EventTriggerBehavior>
                             </interactivity:Interaction.Behaviors>
                         </ListView>
